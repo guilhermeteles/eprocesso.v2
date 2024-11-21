@@ -30,7 +30,7 @@ export default function Dashboard() {
   }, [isMobile]);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <Sidebar
         isOpen={isSidebarOpen}

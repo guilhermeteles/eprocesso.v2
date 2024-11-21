@@ -1,6 +1,6 @@
 import { HEADER_COLOR } from '@/constants';
 import HeaderTextCopy from '@/components/HeaderTextCopy';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 import Nav from './Nav';
 import { faBars, faFile, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import FavProcesso from '@/components/FavProcesso';
@@ -16,6 +16,16 @@ interface MainContentHeaderProps {
 export default function MainContentHeader({
   onMenuToggle,
 }: MainContentHeaderProps) {
+  const [isDraggable, setIsDraggable] = useState(false);
+
+  const handleProcessoSigilosoClick = () => {
+    setIsDraggable(true);
+  };
+
+  const closeProcessoSigiloso = () => {
+    setIsDraggable(false);
+  };
+
   return (
     <div className="sm:ml-2">
       {/* Header */}
@@ -25,7 +35,6 @@ export default function MainContentHeader({
         }}
         className="py-2 px-4 gap-2 flex items-center text-white overflow-auto"
       >
-        {/* Toggle Button */}
         <Button
           className="sm:hidden bg-[#0C326F] text-white rounded p-2"
           size="empty"
@@ -35,30 +44,27 @@ export default function MainContentHeader({
           <FontAwesomeIcon icon={faBars} />
         </Button>
 
-        {/* Favorite Process */}
         <FavProcesso />
 
-        {/* Header Text */}
         <div className="flex gap-6 mr-4">
-          <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold/>
-          <div className='flex gap-2'>
-            <HeaderTextCopy text="05136946504" icon={faUser} bold/>
+          <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold />
+          <div className="flex gap-2">
+            <HeaderTextCopy text="05136946504" icon={faUser} bold />
             <HeaderTextCopy text="UOLIRHEZOWL UVORXRL WV XZIEZOSL" />
           </div>
-          <ProcessoSigiloso text="Processo Sigiloso" icon={faLock} />
+          <ProcessoSigiloso
+            text="Processo Sigiloso"
+            icon={faLock}
+            isDraggable={isDraggable}
+            onOpen={handleProcessoSigilosoClick}
+            onClose={closeProcessoSigiloso}
+          />
         </div>
 
-        {/* Indicators */}
         <Indicadores />
       </header>
 
-      {/* Navigation */}
       <Nav />
     </div>
   );
 }
-
-// PropTypes validation
-MainContentHeader.propTypes = {
-  onMenuToggle: PropTypes.func.isRequired,
-};

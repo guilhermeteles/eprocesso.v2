@@ -9,20 +9,22 @@ import {
   faThList,
 } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
+import { HEADER_COLOR_DARKER, HEADER_COLOR_DARKEST, ORANGE } from "@/constants";
 
 export default function Sorting() {
   const [view, setView] = useState<"hierarchical" | "chronological">("hierarchical");
   const [selectedChronological, setSelectedChronological] = useState<"asc" | "desc">("asc");
 
   return (
-    <div className="bg-[#0C326F] rounded-md flex items-center">
+    <div style={{ backgroundColor: HEADER_COLOR_DARKER }} className="rounded-md flex items-center">
       {/* First group of buttons */}
       <div className="py-1 px-1.5 gap-1 flex border-r border-white/20">
         <Button
           variant="ghost"
           size="empty"
-          className={`bg-[#0C326F] p-1 rounded-sm ${
-            view === "hierarchical" ? "text-orange-500" : ""
+          style={{ backgroundColor: HEADER_COLOR_DARKER }}
+          className={`p-1 rounded-sm ${
+            view === "hierarchical" ? `text-[${ORANGE}]` : ""
           }`}
           onClick={() => setView("hierarchical")}
         >
@@ -31,8 +33,9 @@ export default function Sorting() {
         <Button
           variant="ghost"
           size="empty"
-          className={`bg-[#0C326F] p-1 rounded-sm ${
-            view === "chronological" ? "text-orange-500" : ""
+          style={{ backgroundColor: HEADER_COLOR_DARKER }}
+          className={`p-1 rounded-sm ${
+            view === "chronological" ? `text-[${ORANGE}]` : ""
           }`}
           onClick={() => setView("chronological")}
         >
@@ -41,7 +44,7 @@ export default function Sorting() {
       </div>
 
       {/* Second group of buttons (conditional) */}
-      <div className="bg-[#071D41] p-1 gap-1 flex rounded-r-md">
+      <div style={{ backgroundColor: HEADER_COLOR_DARKEST }} className="p-1 gap-1 flex rounded-r-md">
         {view === "hierarchical" ? (
           <>
             <Button variant="darkBlue" size="empty" className="p-1 rounded-sm">
@@ -57,7 +60,7 @@ export default function Sorting() {
               variant="darkBlue"
               size="empty"
               className={`p-1 rounded-sm ${
-                selectedChronological === "asc" ? "text-orange-500" : ""
+                selectedChronological === "asc" ? `text-[${ORANGE}]` : ""
               }`}
               onClick={() => setSelectedChronological("asc")}
             >
@@ -67,7 +70,7 @@ export default function Sorting() {
               variant="darkBlue"
               size="empty"
               className={`p-1 rounded-sm ${
-                selectedChronological === "desc" ? "text-orange-500" : ""
+                selectedChronological === "desc" ? `text-[${ORANGE}]` : ""
               }`}
               onClick={() => setSelectedChronological("desc")}
             >
