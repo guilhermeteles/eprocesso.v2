@@ -38,7 +38,7 @@ export default function ProcessoSigiloso({
 
 
         {!isDraggable && (
-          <HoverCardContent className="bg-white p-4 shadow-lg rounded w-100">
+          <HoverCardContent className="bg-white p-4 shadow-[0_3px_10px_rgb(0,0,0,0.1)] rounded w-100">
 <div>
               <div className="flex justify-between items-center">
                 <h2 className="text-lg font-bold mt-[2px]">Informações de Sigilo</h2>
@@ -73,7 +73,7 @@ export default function ProcessoSigiloso({
       </HoverCard>
       {isDraggable && (
         <Draggable>
-          <div className="absolute border top-[40px] bg-white p-4 shadow-lg rounded w-100 z-50 cursor-move">
+          <div className="absolute border top-[40px] bg-white p-4 shadow-[0_3px_10px_rgb(0,0,0,0.1)] rounded w-100 z-50 cursor-move">
 
             <div>
               <div className="flex justify-between items-center">

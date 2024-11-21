@@ -1,4 +1,4 @@
-import { HEADER_COLOR } from '@/constants';
+import { useColorContext } from '@/context/ColorContext';
 import HeaderTextCopy from '@/components/HeaderTextCopy';
 import { useState } from 'react';
 import Nav from './Nav';
@@ -11,11 +11,11 @@ import ProcessoSigiloso from './ProcessoSigiloso';
 
 interface MainContentHeaderProps {
   onMenuToggle: () => void;
+  colorMode: 'colorido' | 'outline'; // Accept colorMode as a prop
 }
 
-export default function MainContentHeader({
-  onMenuToggle,
-}: MainContentHeaderProps) {
+export default function MainContentHeader({ onMenuToggle, colorMode }: MainContentHeaderProps) {
+  const { headerColor, headerColorDarker } = useColorContext();
   const [isDraggable, setIsDraggable] = useState(false);
 
   const handleProcessoSigilosoClick = () => {
@@ -31,12 +31,15 @@ export default function MainContentHeader({
       {/* Header */}
       <header
         style={{
-          backgroundColor: HEADER_COLOR,
+          backgroundColor: headerColor,
         }}
         className="py-2 px-4 gap-2 flex items-center text-white overflow-auto"
       >
         <Button
-          className="sm:hidden bg-[#0C326F] text-white rounded p-2"
+          style={{
+            backgroundColor: headerColorDarker,
+          }}
+          className={`sm:hidden text-white rounded p-2`}
           size="empty"
           variant="ghost"
           onClick={onMenuToggle}
@@ -64,7 +67,8 @@ export default function MainContentHeader({
         <Indicadores />
       </header>
 
-      <Nav />
+      {/* Nav Component */}
+      <Nav colorMode={colorMode} />
     </div>
   );
 }

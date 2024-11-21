@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import MainContent from '@/components/MainContent';
 import { SIDEBAR_WIDTH } from '@/constants';
+import PrototypeSettings from '@/components/PrototypeSettings';
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(SIDEBAR_WIDTH); // Default sidebar width in pixels
+  const [sidebarWidth, setSidebarWidth] = useState(SIDEBAR_WIDTH);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
+  const [colorMode, setColorMode] = useState<'colorido' | 'outline'>('colorido'); // Manage color mode
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,7 +55,11 @@ export default function Dashboard() {
         isSidebarOpen={isSidebarOpen}
         onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
         sidebarWidth={isMobile ? 0 : sidebarWidth}
+        colorMode={colorMode} // Pass colorMode to MainContent
       />
+
+      {/* Prototype Settings */}
+      <PrototypeSettings colorMode={colorMode} setColorMode={setColorMode} />
     </div>
   );
 }
