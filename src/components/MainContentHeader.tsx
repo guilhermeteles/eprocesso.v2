@@ -11,7 +11,7 @@ import ProcessoSigiloso from './ProcessoSigiloso';
 
 interface MainContentHeaderProps {
   onMenuToggle: () => void;
-  colorMode: 'colorido' | 'outline'; // Accept colorMode as a prop
+  colorMode: 'colorido' | 'outline';
 }
 
 export default function MainContentHeader({ onMenuToggle, colorMode }: MainContentHeaderProps) {
@@ -27,41 +27,40 @@ export default function MainContentHeader({ onMenuToggle, colorMode }: MainConte
   };
 
   return (
-    <div className="sm:ml-2">
-      {/* Header */}
-      <header
-        className={`${defaultColor} px-4 gap-2 flex items-center overflow-auto h-[50px]`}
-      >
-        <Button
-          className={`${darker} sm:hidden rounded p-2`}
-          size="empty"
-          variant="ghost"
-          onClick={onMenuToggle}
+    <div className="sm:ml-2 w-full">
+      <div className="w-full overflow-x-auto">
+        <header
+          className={`${defaultColor} px-4 gap-2 flex items-center h-[50px] w-max min-w-full`}
         >
-          <FontAwesomeIcon icon={faFolderOpen} className="pl-0.5" />
-        </Button>
+          <Button
+            className={`${darker} sm:hidden rounded p-2 shrink-0`}
+            size="empty"
+            variant="ghost"
+            onClick={onMenuToggle}
+          >
+            <FontAwesomeIcon icon={faFolderOpen} className="pl-0.5" />
+          </Button>
 
-        <FavProcesso />
+          <FavProcesso />
 
-        <div className="flex gap-6 mr-4">
-          <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold />
-          <div className="flex gap-2">
-            <HeaderTextCopy text="05136946504" icon={faUser} bold />
-            <HeaderTextCopy text="UOLIRHEZOWL UVORXRL WV XZIEZOSL" />
+          <div className="flex gap-6 mr-4 flex-shrink-0">
+            <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold />
+            <div className="flex gap-2">
+              <HeaderTextCopy text="05136946504" icon={faUser} bold />
+              <HeaderTextCopy text="UOLIRHEZOWL UVORXRL WV XZIEZOSL" />
+            </div>
+            <ProcessoSigiloso
+              text="Processo Sigiloso"
+              icon={faLock}
+              isDraggable={isDraggable}
+              onOpen={handleProcessoSigilosoClick}
+              onClose={closeProcessoSigiloso}
+            />
           </div>
-          <ProcessoSigiloso
-            text="Processo Sigiloso"
-            icon={faLock}
-            isDraggable={isDraggable}
-            onOpen={handleProcessoSigilosoClick}
-            onClose={closeProcessoSigiloso}
-          />
-        </div>
 
-        <Indicadores />
-      </header>
-
-      {/* Nav Component */}
+          <Indicadores />
+        </header>
+      </div>
       <Nav colorMode={colorMode} />
     </div>
   );

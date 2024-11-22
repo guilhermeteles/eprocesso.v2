@@ -1,4 +1,5 @@
 import DocumentsRules from "./DocumentsRules";
+import { ScrollArea } from "./ui/scroll-area"; // Adjust the import path to match your file structure
 
 const mockDocuments = [
   {
@@ -39,5 +40,9 @@ const mockUser = {
 };
 
 export default function App() {
-  return <DocumentsRules documents={mockDocuments} user={mockUser} />;
+  return (
+    <ScrollArea className="h-full w-full">
+      <DocumentsRules documents={mockDocuments} user={mockUser} />
+    </ScrollArea>
+  );
 }

@@ -15,9 +15,9 @@ export default function SidebarHeader({ onClose }: SidebarHeaderProps) {
     <div className="flex">
       {/* Header */}
       <div
-        className={`${defaultColor} flex px-4 grow justify-between items-center overflow-auto h-[50px]`}
+        className={`${defaultColor} flex px-2 grow justify-between items-center overflow-auto h-[50px]`}
       >
-        <div className="flex gap-4">
+        <div className="flex gap-4 justify-between w-full">
           <Sorting />
           <PageNumber />
         </div>

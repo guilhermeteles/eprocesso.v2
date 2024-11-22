@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './ui/tooltip'; // Adjust the import path
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core'; // Import type for icons
 
 interface HeaderTextCopyProps {
   text: string; // Text to display and copy
-  icon?: IconDefinition; // Optional icon to display before copying
   copyDuration?: number; // Duration (ms) for success state (default: 2 seconds)
   bold?: boolean; // Optionally make the text bold
+  icon?: IconDefinition; // Optional FontAwesome icon to display
 }
 
 export default function HeaderTextCopy({
   text,
-  icon,
   copyDuration = 2000,
   bold = false,
+  icon,
 }: HeaderTextCopyProps) {
   const [copied, setCopied] = useState(false);
 
@@ -22,30 +22,33 @@ export default function HeaderTextCopy({
     try {
       await navigator.clipboard.writeText(text); // Copy text to clipboard
       setCopied(true); // Set copied state to true
-      setTimeout(() => setCopied(false), copyDuration); // Reset after duration
+      setTimeout(() => setCopied(false), copyDuration); // Reset after delay
     } catch (error) {
       console.error('Failed to copy text:', error);
     }
   };
 
   return (
-    <div
-      className={`flex items-center gap-2 cursor-pointer whitespace-nowrap ${
-        copied ? 'text-green-500' : 'text-white'
-      }`}
-      onClick={handleCopy}
-    >
-      {/* Only render the FontAwesomeIcon if there is an icon to display */}
-      {(icon || copied) && (
-        <FontAwesomeIcon icon={copied ? faCheck : (icon as IconDefinition)} />
-      )}
-      <span
-        className={`${
-          copied ? 'font-bold' : bold ? 'font-bold' : ''
-        }`}
-      >
-        {text}
-      </span>
+    <div className="relative">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger onClick={handleCopy}>
+            <div
+              className={`flex items-center gap-2 cursor-pointer whitespace-nowrap ${
+                copied ? 'text-green-500' : 'text-white'
+              }`}
+            >
+              {icon && <FontAwesomeIcon icon={icon} className="mr-2" />} {/* Render icon if provided */}
+              <span className={`${copied ? 'font-bold' : bold ? 'font-bold' : ''}`}>
+                {text}
+              </span>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            {copied ? 'Copiado!' : 'Clique no texto para copiar'}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 }
