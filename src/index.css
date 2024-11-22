@@ -71,3 +71,11 @@
     padding-top:0.25rem; /* Equivalent to pt-1 */
   }
 }
+
+.group:hover .FontAwesomeIcon {
+  opacity: 0.5;
+}
+
+.group .FontAwesomeIcon:hover {
+  opacity: 1!important;
+}

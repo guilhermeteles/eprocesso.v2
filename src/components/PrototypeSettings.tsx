@@ -25,7 +25,7 @@ export default function PrototypeSettings({ colorMode, setColorMode }: Prototype
       <DropdownMenuTrigger asChild>
         <Button
           className="absolute right-5 bottom-5"
-          size="navIcon"
+          size="smallIcon"
           variant={colorMode === 'outline' ? 'outline' : 'ghost'} // Use colorMode here
         >
           <FontAwesomeIcon icon={faCog} />

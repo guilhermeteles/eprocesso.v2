@@ -15,18 +15,19 @@ import { useColorContext } from '@/context/ColorContext';
 export default function Sorting() {
   const [view, setView] = useState<"hierarchical" | "chronological">("hierarchical");
   const [selectedChronological, setSelectedChronological] = useState<"asc" | "desc">("asc");
-  const { headerColorDarkest, headerColorDarker } = useColorContext();
+  const { darker, darkest } = useColorContext();
 
   return (
-    <div style={{ backgroundColor: headerColorDarker }} className="rounded-md flex items-center">
+    <div 
+      className={`${darker} rounded-md flex items-center`}
+    >
       {/* First group of buttons */}
-      <div className="py-1 px-1.5 gap-1 flex border-r border-white/20">
+      <div className="py-1 px-1.5 gap-1 flex border-r border-white/10">
       <Button
-        variant="darkestBlue"
+        variant="darker"
         size="empty"
         style={{
-          // backgroundColor: headerColorDarker,
-          color: view === "hierarchical" ? ORANGE : "inherit", // Use ORANGE when active
+          color: view === "hierarchical" ? ORANGE : "#ffffff77", // Use ORANGE when active
         }}
         className="p-1 rounded-sm"
         onClick={() => setView("hierarchical")}
@@ -34,11 +35,10 @@ export default function Sorting() {
         <FontAwesomeIcon icon={faThList} />
       </Button>
       <Button
-        variant="darkestBlue"
+        variant="darker"
         size="empty"
         style={{
-          // backgroundColor: headerColorDarker,
-          color: view === "chronological" ? ORANGE : "inherit", // Use ORANGE when active
+          color: view === "chronological" ? ORANGE : "#ffffff77", // Use ORANGE when active
         }}
         className="p-1 rounded-sm"
         onClick={() => setView("chronological")}
@@ -49,23 +49,27 @@ export default function Sorting() {
       </div>
 
       {/* Second group of buttons (conditional) */}
-      <div style={{ backgroundColor: headerColorDarkest }} className="p-1 gap-1 flex rounded-r-md">
+      <div className={`${darkest} p-1 gap-1 flex rounded-r-md`}>
         {view === "hierarchical" ? (
           <>
-            <Button variant="darkBlue" size="empty" className="p-1 rounded-sm">
+            <Button 
+              variant="darkest" 
+              size="empty" className="p-1 rounded-sm text-[#ffffff77]">
               <FontAwesomeIcon icon={faBars} />
             </Button>
-            <Button variant="darkBlue" size="empty" className="p-1 rounded-sm">
+            <Button 
+              variant="darkest" 
+              size="empty" className="p-1 rounded-sm text-[#ffffff77]">
               <FontAwesomeIcon icon={faBarsStaggered} />
             </Button>
           </>
         ) : (
           <>
             <Button
-              variant="darkBlue"
+              variant="darkest"
               size="empty"
               style={{
-                color: selectedChronological === "asc" ? ORANGE : "inherit", // Use ORANGE when active
+                color: selectedChronological === "asc" ? ORANGE : "#ffffff77", // Use ORANGE when active
               }}
               className="p-1 rounded-sm"
               onClick={() => setSelectedChronological("asc")}
@@ -73,10 +77,10 @@ export default function Sorting() {
               <FontAwesomeIcon icon={faArrowDown19} />
             </Button>
             <Button
-              variant="darkBlue"
+              variant="darkest"
               size="empty"
               style={{
-                color: selectedChronological === "desc" ? ORANGE : "inherit", // Use ORANGE when active
+                color: selectedChronological === "desc" ? ORANGE : "#ffffff77", // Use ORANGE when active
               }}
               className="p-1 rounded-sm"
               onClick={() => setSelectedChronological("desc")}

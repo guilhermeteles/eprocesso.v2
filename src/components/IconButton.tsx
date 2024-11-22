@@ -15,10 +15,10 @@ export default function IconButton({ icon, group, colorMode }: IconButtonProps) 
   return (
     <Button
       variant={colorMode === 'colorido' ? 'ghost' : 'outline'}
-      size="navIcon"
+      size="smallIcon"
       style={colorMode === 'colorido' ? { backgroundColor: backgroundColor } : undefined} // Apply background color only for Colorido
     >
-      <FontAwesomeIcon icon={icon} />
+      <FontAwesomeIcon icon={icon}  />
     </Button>
   );
 }

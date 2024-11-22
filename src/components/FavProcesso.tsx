@@ -13,10 +13,10 @@ export default function FavProcesso() {
 
   return (
     <Button
-      variant="ghost"
-      size="navIcon"
+      variant="ghost2"
+      size="smallIcon"
       onClick={toggleFav}
-      className={`px-2 rounded ${isFav ? 'text-yellow-500' : 'text-white'}`}
+      className={`px-2 rounded ${isFav ? 'text-yellow-500' : ''}`}
     >
       <FontAwesomeIcon icon={isFav ? solidStar : regularStar} />
     </Button>

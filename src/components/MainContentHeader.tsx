@@ -2,7 +2,7 @@ import { useColorContext } from '@/context/ColorContext';
 import HeaderTextCopy from '@/components/HeaderTextCopy';
 import { useState } from 'react';
 import Nav from './Nav';
-import { faBars, faFile, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faFolderOpen, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import FavProcesso from '@/components/FavProcesso';
 import Indicadores from './Indicadores';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ interface MainContentHeaderProps {
 }
 
 export default function MainContentHeader({ onMenuToggle, colorMode }: MainContentHeaderProps) {
-  const { headerColor, headerColorDarker } = useColorContext();
+  const { darker, defaultColor } = useColorContext();
   const [isDraggable, setIsDraggable] = useState(false);
 
   const handleProcessoSigilosoClick = () => {
@@ -30,21 +30,15 @@ export default function MainContentHeader({ onMenuToggle, colorMode }: MainConte
     <div className="sm:ml-2">
       {/* Header */}
       <header
-        style={{
-          backgroundColor: headerColor,
-        }}
-        className="py-2 px-4 gap-2 flex items-center text-white overflow-auto"
+        className={`${defaultColor} px-4 gap-2 flex items-center overflow-auto h-[50px]`}
       >
         <Button
-          style={{
-            backgroundColor: headerColorDarker,
-          }}
-          className={`sm:hidden text-white rounded p-2`}
+          className={`${darker} sm:hidden rounded p-2`}
           size="empty"
           variant="ghost"
           onClick={onMenuToggle}
         >
-          <FontAwesomeIcon icon={faBars} />
+          <FontAwesomeIcon icon={faFolderOpen} className="pl-0.5" />
         </Button>
 
         <FavProcesso />

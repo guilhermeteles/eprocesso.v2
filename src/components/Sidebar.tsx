@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SidebarHeader from './SidebarHeader';
 import { SIDEBAR_WIDTH } from '@/constants';
+import Documents from './Documents';
 
 type SidebarProps = {
   isOpen: boolean;
@@ -47,12 +48,7 @@ export default function Sidebar({ isOpen, onClose, onResize }: SidebarProps) {
     >
       <div>
         <SidebarHeader onClose={onClose} />
-        <ul className="p-2 h-svh overflow-auto">
-          <li className="mt-2 cursor-pointer hover:bg-gray-700 rounded">Menu Item 1</li>
-          <li className="mt-2 cursor-pointer hover:bg-gray-700 rounded">Menu Item 2</li>
-          <li className="mt-2 cursor-pointer hover:bg-gray-700 rounded">Menu Item 3</li>
-          <li className="mt-2 cursor-pointer hover:bg-gray-700 rounded">Menu Item 4</li>
-        </ul>
+        <Documents/>
       </div>
 
       {window.innerWidth > 640 && (

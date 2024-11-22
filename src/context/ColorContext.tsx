@@ -1,68 +1,89 @@
-// src/context/ColorContext.tsx
-import React, { createContext, useState, useContext } from 'react';
-import { BLUE, BLUE_DARKER, BLUE_DARKEST } from '@/constants'; // Default color constants
+import React, { createContext, useContext, useState } from 'react';
 
-// Define the shape of the context
-interface ColorContextProps {
-  headerColor: string;
-  headerColorDarker: string;
-  headerColorDarkest: string;
-  headerBorderColor: string;
-  setHeaderTheme: (theme: 'blue' | 'green' | 'gray') => void;
-}
+// Define available themes
+export type Theme = 'blue' | 'green' | 'gray';
 
-// Create the context
-const ColorContext = createContext<ColorContextProps | undefined>(undefined);
-
-// Map themes to colors
-const colorThemes = {
+// Define the structure of themes
+const themes: Record<
+  Theme,
+  {
+    defaultColor: string;
+    defaultColorHover: string;
+    darker: string;
+    darkerHover: string;
+    darkest: string;
+    darkestHover: string;
+  }
+> = {
   blue: {
-    headerColor: BLUE,
-    headerColorDarker: BLUE_DARKER,
-    headerColorDarkest: BLUE_DARKEST,
-    headerBorderColor: BLUE,
+    defaultColor: 'bg-[#155BCB] text-white',
+    defaultColorHover: 'hover:bg-[#0C326F]',
+    darker: 'bg-[#0C326F]',
+    darkerHover: 'hover:bg-[#155BCB]',
+    darkest: 'bg-[#071D41]',
+    darkestHover: 'hover:bg-[#0C326F]',
   },
   green: {
-    headerColor: '#1A8551', // GREEN
-    headerColorDarker: '#10633B', // GREEN_DARKER
-    headerColorDarkest: '#093E26', // GREEN_DARKEST
-    headerBorderColor: '#1A8551', // GREEN
+    defaultColor: 'bg-[#1A8551] text-white',
+    defaultColorHover: 'hover:bg-[#10633B]',
+    darker: 'bg-[#10633B]',
+    darkerHover: 'hover:bg-[#1A8551]',
+    darkest: 'bg-[#093E26]',
+    darkestHover: 'hover:bg-[#10633B]',
   },
   gray: {
-    headerColor: '#6C757D', // GRAY
-    headerColorDarker: '#495057', // GRAY_DARKER
-    headerColorDarkest: '#343A40', // GRAY_DARKEST
-    headerBorderColor: '#6C757D', // GRAY
+    defaultColor: 'bg-[#DFE1E2]',
+    defaultColorHover: 'hover:bg-[#C6CACE]',
+    darker: 'bg-[#C6CACE]',
+    darkerHover: 'hover:bg-[#DFE1E2]',
+    darkest: 'bg-[#A9AEB1]',
+    darkestHover: 'hover:bg-[#C6CACE]',
   },
 };
+
+// Context type definition
+interface ColorContextType {
+  defaultColor: string;
+  defaultColorHover:string;
+  darker: string;
+  darkerHover:string;
+  darkest: string;
+  darkestHover:string;
+  setHeaderTheme: (theme: Theme) => void;
+  currentTheme: Theme;
+}
+
+// Create context
+const ColorContext = createContext<ColorContextType | undefined>(undefined);
 
 // Provider component
 export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<'blue' | 'green' | 'gray'>('blue'); // Default theme
+  const [currentTheme, setCurrentTheme] = useState<Theme>('blue'); // Default theme
 
-  const currentColors = colorThemes[theme];
+  // Function to change theme
+  const setHeaderTheme = (theme: Theme) => setCurrentTheme(theme);
 
-  const setHeaderTheme = (theme: 'blue' | 'green' | 'gray') => {
-    setTheme(theme); // Update theme
+  // Current theme values
+  const { defaultColor, defaultColorHover, darker, darkerHover, darkest, darkestHover } = themes[currentTheme];
+
+  // Context value
+  const value: ColorContextType = {
+    defaultColor,
+    defaultColorHover,
+    darker,
+    darkerHover,
+    darkest,
+    darkestHover,
+    setHeaderTheme,
+    currentTheme,
   };
 
-  return (
-    <ColorContext.Provider
-      value={{
-        ...currentColors, // Provide dynamic colors
-        setHeaderTheme, // Function to update theme
-      }}
-    >
-      {children}
-    </ColorContext.Provider>
-  );
+  return <ColorContext.Provider value={value}>{children}</ColorContext.Provider>;
 };
 
-// Custom hook for accessing the context
-export const useColorContext = (): ColorContextProps => {
+// Custom hook for using the context
+export const useColorContext = (): ColorContextType => {
   const context = useContext(ColorContext);
-  if (!context) {
-    throw new Error('useColorContext must be used within a ColorProvider');
-  }
+  if (!context) throw new Error('useColorContext must be used within a ColorProvider');
   return context;
 };

@@ -1,9 +1,9 @@
 import { faClipboardList } from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import IconButton from './IconButton';
 import {
-  faArrowRight,
-  faArrowUp,
+  faArrowRightArrowLeft,
   faCalendar,
+  faCircleInfo,
   faClipboard,
   faDownload,
   faEllipsisVertical,
@@ -11,14 +11,18 @@ import {
   faFileArrowUp,
   faFileCircleCheck,
   faFileContract,
+  faFileSignature,
+  faFolder,
   faInfoCircle,
   faLink,
   faLock,
-  faRotateRight,
-  faTrashAlt,
+  faRightLong,
+  faTrashCan,
+  faUpLong,
   faUser,
   faUserCheck,
   faUserGroup,
+  faUserPen,
 } from '@fortawesome/free-solid-svg-icons';
 
 interface NavProps {
@@ -43,11 +47,10 @@ export default function Nav({ colorMode }: NavProps) {
         <div className="flex flex-col gap-1">
           <div className="text-xs">Processo</div>
           <div className="flex gap-2">
-            <IconButton icon={faArrowRight} group="processo" colorMode={colorMode} />
-            <IconButton icon={faArrowUp} group="processo" colorMode={colorMode} />
-            <IconButton icon={faRotateRight} group="processo" colorMode={colorMode} />
-            <IconButton icon={faUserGroup} group="processo" colorMode={colorMode} />
+            <IconButton icon={faRightLong} group="processo" colorMode={colorMode} />
+            <IconButton icon={faUpLong} group="processo" colorMode={colorMode} />
             <IconButton icon={faUserCheck} group="processo" colorMode={colorMode} />
+            <IconButton icon={faUserGroup} group="processo" colorMode={colorMode} />
             <IconButton icon={faDownload} group="processo" colorMode={colorMode} />
             <IconButton icon={faEllipsisVertical} group="processo" colorMode={colorMode} />
           </div>
@@ -57,9 +60,9 @@ export default function Nav({ colorMode }: NavProps) {
           <div className="flex gap-2">
             <IconButton icon={faFileArrowUp} group="documentos" colorMode={colorMode} />
             <IconButton icon={faFileCircleCheck} group="documentos" colorMode={colorMode} />
-            <IconButton icon={faFileContract} group="documentos" colorMode={colorMode} />
-            <IconButton icon={faTrashAlt} group="documentos" colorMode={colorMode} />
-            <IconButton icon={faInfoCircle} group="documentos" colorMode={colorMode} />
+            <IconButton icon={faFileSignature} group="documentos" colorMode={colorMode} />
+            <IconButton icon={faTrashCan} group="documentos" colorMode={colorMode} />
+            <IconButton icon={faCircleInfo} group="documentos" colorMode={colorMode} />
             <IconButton icon={faDownload} group="documentos" colorMode={colorMode} />
             <IconButton icon={faEllipsisVertical} group="documentos" colorMode={colorMode} />
           </div>
