@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import SidebarHeader from './SidebarHeader';
-import { SIDEBAR_WIDTH } from '@/constants';
-import Documents from './Documents';
+import React, { useState } from "react";
+import SidebarHeader from "./SidebarHeader";
+import { SIDEBAR_WIDTH } from "@/constants";
+import Documents from "./Documents";
 
 type SidebarProps = {
   isOpen: boolean;
   onClose: () => void;
   onResize: (width: number) => void;
-  sidebarWidth: number; // Add this property
-  isMobile: boolean;
 };
 
-export default function Sidebar({ isOpen, onClose, onResize }: SidebarProps) {
+export default function Sidebar({
+  isOpen,
+  onClose,
+  onResize,
+}: SidebarProps) {
   const [sidebarWidth, setSidebarWidth] = useState(SIDEBAR_WIDTH); // Default width in pixels
   const minWidth = 260; // Minimum width in pixels
   const maxWidth = 700; // Maximum width in pixels
@@ -27,33 +29,37 @@ export default function Sidebar({ isOpen, onClose, onResize }: SidebarProps) {
 
   const handleMouseUp = () => {
     isDragging.current = false;
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
   };
 
   const handleMouseDown = () => {
     isDragging.current = true;
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
   };
 
   return (
     <div
       className={`bg-white fixed top-0 left-0 z-50 h-screen transition-transform transform ${
-        isOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'
+        isOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"
       }`}
       style={{
-        width: isOpen && window.innerWidth <= 640 ? '100%' : `${sidebarWidth}px`, // Full width on mobile
+        width: isOpen && window.innerWidth <= 640 ? "100%" : `${sidebarWidth}px`, // Full width on mobile
       }}
     >
-      <div>
-        <SidebarHeader onClose={onClose} />
-        <Documents/>
+      {/* Sidebar Header */}
+      <SidebarHeader onClose={onClose} />
+
+      {/* Sidebar Content */}
+      <div className="h-[calc(100vh-50px)] overflow-auto"> {/* Adjust height to account for header */}
+        <Documents />
       </div>
 
+      {/* Resizing Handle */}
       {window.innerWidth > 640 && (
         <div
-          className="absolute top-0 -right-2 h-full w-2 cursor-ew-resize bg-gray-100"
+          className="absolute top-0 -right-2 h-full w-2 cursor-ew-resize bg-gray-200"
           onMouseDown={handleMouseDown}
         ></div>
       )}

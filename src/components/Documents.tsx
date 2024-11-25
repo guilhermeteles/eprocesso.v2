@@ -1,176 +1,125 @@
-import DocumentsRules from "./DocumentsRules";
-import { ScrollArea } from "./ui/scroll-area"; // Adjust the import path to match your file structure
+import React, { useState } from "react";
+import { documentsData, Document } from "./documentsList";
+import DocumentsActions from "./DocumentsActions";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const mockDocuments = [
-  {
-    id: 1, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-    name: 'Petição Inicial de Ação Civil',
-    page: '81-85',
-    children: [
-      {
-        id: 2, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-        name: 'Citação',
-        page: '46-50',
-        children: [
-          {
-            id: 3, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-            name: 'Resposta à Citação',
-            page: '101-102',
-            children: [
-              {
-                id: 4, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-                name: 'Contestação',
-                page: '110-114',
-                children: [
-                  {
-                    id: 5, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-                    name: 'Réplicas à Contestação',
-                    page: '36-40',
-                    children: [
-                      { id: 6, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Juntada de Documentos', page: '1-5' },
-                      { id: 7, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Pedido de Tutela Provisória', page: '57-61' },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 8, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-    name: 'Ação de Indenização',
-    page: '16-20',
-    children: [
-      {
-        id: 9, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-        name: 'Laudo Pericial',
-        page: '103-104',
-        children: [
-          {
-            id: 10, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-            name: 'Manifestação sobre o Laudo',
-            page: '67-71',
-            children: [
-              {
-                id: 11, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-                name: 'Pedido de Produção de Provas',
-                page: '72-76',
-                children: [
-                  { id: 12, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Provas Documentais', page: '115-119' },
-                  { id: 13, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Provas Testemunhais', page: '77-78' },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 14, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-    name: 'Ação de Alimentos',
-    page: '6-10',
-    children: [
-      {
-        id: 15, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-        name: 'Pedido de Alimentos',
-        page: '11-15',
-        children: [
-          {
-            id: 16, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-            name: 'Decisão Judicial',
-            page: '54-56',
-            children: [
-              {
-                id: 17, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-                name: 'Recurso de Apelação',
-                page: '21-25',
-                children: [
-                  { id: 18, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Contrarrazões', page: '41-45' },
-                  { id: 19, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Juntada de Novos Documentos', page: '28-30' },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 20, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-    name: 'Embargos de Declaração',
-    page: '96-100',
-    children: [
-      {
-        id: 21, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-        name: 'Decisão dos Embargos',
-        page: '31-35',
-        children: [
-          {
-            id: 22, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-            name: 'Recurso Especial',
-            page: '50-53',
-            children: [
-              {
-                id: 23, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-                name: 'Petição de Admissibilidade',
-                page: '125-126',
-                children: [
-                  { id: 24, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Parecer do Ministério Público', page: '62-66' },
-                  { id: 25, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Juntada de Novos Fatos', page: '120-124' },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 26, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-    name: 'Ação de Usucapião',
-    page: '3-5',
-    children: [
-      {
-        id: 27, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-        name: 'Certidão de Registro de Imóveis',
-        page: '86-90',
-        children: [
-          {
-            id: 28, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-            name: 'Manifestação do Réu',
-            page: '47-50',
-            children: [
-              {
-                id: 29, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).',
-                name: 'Relatório de Vistoria',
-                page: '105-109',
-                children: [
-                  { id: 30, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Pedido de Desocupação', page: '95-99' },
-                  { id: 31, situacao: 'MINUTA', tamanho: '1,739 MB', pendjuntada: '0 Assinatura(s) Realizada(s) 2 Assinatura(s) pendente(s).', name: 'Protesto de Irregularidade', page: '35-40' },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-];
+type SelectedDocuments = Record<number, boolean>;
 
+const DocumentItem: React.FC<{
+  document: Document;
+  level: number;
+  onToggle: (id: number, checked: boolean, children?: Document[]) => void;
+  isChecked: boolean;
+  allSelected: SelectedDocuments;
+}> = ({
+  document,
+  level,
+  onToggle,
+  isChecked,
+  allSelected,
+}) => {
+  const [expanded, setExpanded] = useState(false);
+  const hasChildren = document.children && document.children.length > 0;
 
-const mockUser = {
-  isTeamMember: true,
-  isSharingProvisionMember: false,
+  return (
+    <div
+      style={{ marginLeft: `${level * 16}px` }}
+      className="flex flex-col"
+    >
+      <div className="flex items-center">
+        {hasChildren && (
+          <span
+            className="cursor-pointer mr-2 transform transition-transform"
+            onClick={() => setExpanded(!expanded)}
+            style={{
+              transform: expanded ? "rotate(90deg)" : "rotate(0)",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faCaretRight}
+              className="text-orange-500"
+              size="sm"
+              title="Expand/Collapse"
+            />
+          </span>
+        )}
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={(e) => onToggle(document.id, e.target.checked, document.children)}
+          className="mr-2"
+        />
+        <span className="whitespace-nowrap hover:underline cursor-pointer">
+          {document.name}
+        </span>
+      </div>
+      {expanded && hasChildren && (
+        <div className="mt-1">
+          {document.children?.map((child) => (
+            <DocumentItem
+              key={child.id}
+              document={child}
+              level={level + 1}
+              onToggle={onToggle}
+              isChecked={!!allSelected[child.id]}
+              allSelected={allSelected}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
-export default function App() {
+const Documents: React.FC = () => {
+  const [selectedDocuments, setSelectedDocuments] = useState<SelectedDocuments>({});
+
+  const handleToggle = (id: number, checked: boolean, children?: Document[]) => {
+    setSelectedDocuments((prev) => {
+      const updated = { ...prev };
+
+      // Update the clicked item
+      updated[id] = checked;
+
+      // Only update children when checking/unchecking a parent
+      if (children) {
+        const updateChildren = (docs: Document[]) => {
+          docs.forEach((child) => {
+            updated[child.id] = checked;
+            if (child.children) {
+              updateChildren(child.children);
+            }
+          });
+        };
+        updateChildren(children);
+      }
+
+      return updated;
+    });
+  };
+
+  const selectedIds = Object.keys(selectedDocuments)
+    .filter((id) => selectedDocuments[Number(id)])
+    .map(Number);
+
   return (
-    <ScrollArea className="h-full w-full">
-      <DocumentsRules documents={mockDocuments} user={mockUser} />
-    </ScrollArea>
+    <div className="p-4">
+      {documentsData.map((doc) => (
+        <DocumentItem
+          key={doc.id}
+          document={doc}
+          level={0}
+          onToggle={handleToggle}
+          isChecked={!!selectedDocuments[doc.id]}
+          allSelected={selectedDocuments}
+        />
+      ))}
+      {selectedIds.length > 0 && (
+        <DocumentsActions selectedIds={selectedIds} colorMode="colorido" />
+      )}
+    </div>
   );
-}
+};
+
+export default Documents;

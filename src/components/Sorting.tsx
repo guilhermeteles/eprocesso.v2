@@ -10,7 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import { ORANGE } from "@/constants";
-import { useColorContext } from '@/context/ColorContext';
+import { useColorContext } from "@/context/ColorContext";
+
 
 export default function Sorting() {
   const [view, setView] = useState<"hierarchical" | "chronological">("hierarchical");
@@ -23,29 +24,28 @@ export default function Sorting() {
     >
       {/* First group of buttons */}
       <div className="py-1 px-1.5 gap-1 flex border-r border-white/10">
-      <Button
-        variant="darker"
-        size="empty"
-        style={{
-          color: view === "hierarchical" ? ORANGE : "#ffffff77", // Use ORANGE when active
-        }}
-        className="p-1 rounded-sm"
-        onClick={() => setView("hierarchical")}
-      >
-        <FontAwesomeIcon icon={faThList} />
-      </Button>
-      <Button
-        variant="darker"
-        size="empty"
-        style={{
-          color: view === "chronological" ? ORANGE : "#ffffff77", // Use ORANGE when active
-        }}
-        className="p-1 rounded-sm"
-        onClick={() => setView("chronological")}
-      >
-        <FontAwesomeIcon icon={faCalendarDays} className="-mt-0.5" />
-      </Button>
-
+        <Button
+          variant="darker"
+          size="empty"
+          style={{
+            color: view === "hierarchical" ? ORANGE : "#ffffff77", // Use ORANGE when active
+          }}
+          className="p-1 rounded-sm"
+          onClick={() => setView("hierarchical")}
+        >
+          <FontAwesomeIcon icon={faThList} />
+        </Button>
+        <Button
+          variant="darker"
+          size="empty"
+          style={{
+            color: view === "chronological" ? ORANGE : "#ffffff77", // Use ORANGE when active
+          }}
+          className="p-1 rounded-sm"
+          onClick={() => setView("chronological")}
+        >
+          <FontAwesomeIcon icon={faCalendarDays} className="-mt-0.5" />
+        </Button>
       </div>
 
       {/* Second group of buttons (conditional) */}
@@ -54,12 +54,16 @@ export default function Sorting() {
           <>
             <Button 
               variant="darkest" 
-              size="empty" className="p-1 rounded-sm text-[#ffffff77]">
+              size="empty"
+              className="p-1 rounded-sm text-[#ffffff77]"
+            >
               <FontAwesomeIcon icon={faBars} />
             </Button>
             <Button 
               variant="darkest" 
-              size="empty" className="p-1 rounded-sm text-[#ffffff77]">
+              size="empty"
+              className="p-1 rounded-sm text-[#ffffff77]"
+            >
               <FontAwesomeIcon icon={faBarsStaggered} />
             </Button>
           </>
@@ -87,7 +91,6 @@ export default function Sorting() {
             >
               <FontAwesomeIcon icon={faArrowUp19} />
             </Button>
-
           </>
         )}
       </div>

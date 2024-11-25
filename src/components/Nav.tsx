@@ -16,7 +16,11 @@ import {
   faInfoCircle,
   faLink,
   faLock,
+  faNotesMedical,
+  faNoteSticky,
+  faPlus,
   faRightLong,
+  faSquarePlus,
   faTrashCan,
   faUpLong,
   faUser,
@@ -70,8 +74,8 @@ export default function Nav({ colorMode }: NavProps) {
         <div className="flex flex-col gap-1">
           <div className="text-xs">Notas</div>
           <div className="flex gap-2">
-            <IconButton icon={faClipboard} group="notas" colorMode={colorMode} />
-            <IconButton icon={faClipboardList} group="notas" colorMode={colorMode} />
+            <IconButton icon={faSquarePlus} group="notas" colorMode={colorMode} />
+            <IconButton icon={faNoteSticky} group="notas" colorMode={colorMode} />
           </div>
         </div>
       </div>
