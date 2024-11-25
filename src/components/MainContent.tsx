@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import MainContentHeader from './MainContentHeader';
+import Cards from './Cards';
 
 interface Props {
   onMenuToggle: () => void; // Function type with no arguments and no return value
@@ -11,7 +12,7 @@ interface Props {
 export default function MainContent({ onMenuToggle, sidebarWidth, colorMode }: Props) {
   return (
     <div
-      className="flex-1 flex flex-col bg-[#F7F9FA] "
+      className="flex-1 flex flex-col bg-[#F7F9FA]"
       style={{
         marginLeft: window.innerWidth > 640 ? `${sidebarWidth}px` : '0', // Adjust content margin based on sidebar width
         width: `${sidebarWidth}px`
@@ -21,10 +22,7 @@ export default function MainContent({ onMenuToggle, sidebarWidth, colorMode }: P
       <MainContentHeader onMenuToggle={onMenuToggle} colorMode={colorMode} />
 
       {/* Content */}
-      <main className="flex-1 p-4 ml-2">
-        <h2 className="text-xl font-bold">Content Area</h2>
-        <p className="mt-2">This is where your main content goes.</p>
-      </main>
+      <Cards/>
     </div>
   );
 }
