@@ -38,17 +38,9 @@ export default function Dashboard() {
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
         onResize={(width) => setSidebarWidth(width)}
-        sidebarWidth={sidebarWidth}
-        isMobile={isMobile}
+        // sidebarWidth={sidebarWidth}
+        // isMobile={isMobile}
       />
-
-      {/* Overlay for Sidebar on Mobile */}
-      {isSidebarOpen && isMobile && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 sm:hidden"
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
-      )}
 
       {/* Main Content */}
       <MainContent

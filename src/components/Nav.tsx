@@ -1,24 +1,17 @@
-import { faClipboardList } from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import IconButton from './IconButton';
 import {
-  faArrowRightArrowLeft,
   faCalendar,
   faCircleInfo,
-  faClipboard,
   faDownload,
   faEllipsisVertical,
   faFile,
   faFileArrowUp,
   faFileCircleCheck,
-  faFileContract,
   faFileSignature,
-  faFolder,
   faInfoCircle,
   faLink,
   faLock,
-  faNotesMedical,
   faNoteSticky,
-  faPlus,
   faRightLong,
   faSquarePlus,
   faTrashCan,
@@ -26,7 +19,6 @@ import {
   faUser,
   faUserCheck,
   faUserGroup,
-  faUserPen,
 } from '@fortawesome/free-solid-svg-icons';
 
 interface NavProps {
