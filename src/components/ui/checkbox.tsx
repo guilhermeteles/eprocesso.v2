@@ -25,8 +25,12 @@ const Checkbox = React.forwardRef<
         "data-[state=checked]:text-white data-[state=indeterminate]:text-white"
       )}
     >
-      {/* Radix handles the `data-state` internally */}
-      <Check className="h-4 w-4" />
+      {/* Render Minus for indeterminate state and Check for checked state */}
+      {props.checked === "indeterminate" ? (
+        <Minus className="h-4 w-4" />
+      ) : (
+        <Check className="h-4 w-4" />
+      )}
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));
