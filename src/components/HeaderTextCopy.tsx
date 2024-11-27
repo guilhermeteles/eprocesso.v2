@@ -8,6 +8,7 @@ interface HeaderTextCopyProps {
   copyDuration?: number; // Duration (ms) for success state (default: 2 seconds)
   bold?: boolean; // Optionally make the text bold
   icon?: IconDefinition; // Optional FontAwesome icon to display
+  className?: string; // Additional custom className
 }
 
 export default function HeaderTextCopy({
@@ -15,6 +16,7 @@ export default function HeaderTextCopy({
   copyDuration = 2000,
   bold = false,
   icon,
+  className = '',
 }: HeaderTextCopyProps) {
   const [copied, setCopied] = useState(false);
 
@@ -29,7 +31,7 @@ export default function HeaderTextCopy({
   };
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger onClick={handleCopy}>
@@ -39,7 +41,9 @@ export default function HeaderTextCopy({
               }`}
             >
               {icon && <FontAwesomeIcon icon={icon} className="mr-2" />} {/* Render icon if provided */}
-              <span className={`${copied ? 'font-bold' : bold ? 'font-bold' : ''}`}>
+              <span
+                className={`truncate ${copied ? 'font-bold' : bold ? 'font-bold' : ''}`}
+              >
                 {text}
               </span>
             </div>

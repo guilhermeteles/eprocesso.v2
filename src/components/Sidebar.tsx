@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SidebarHeader from "./SidebarHeader";
 import { SIDEBAR_WIDTH } from "@/constants";
 import Documents from "./Documents";
+import {folder} from "./documentsList"
 
 type SidebarProps = {
   isOpen: boolean;
@@ -18,6 +19,23 @@ export default function Sidebar({
   const minWidth = 260; // Minimum width in pixels
   const maxWidth = 700; // Maximum width in pixels
   const isDragging = React.useRef(false); // Ref to track dragging state
+
+  // Function to handle window resize
+  const handleWindowResize = () => {
+    if (window.innerWidth <= 640 && isOpen) {
+      setSidebarWidth(window.innerWidth); // Full width on small screens
+    } else if (window.innerWidth > 640) {
+      setSidebarWidth((prev) => Math.min(Math.max(prev, minWidth), maxWidth)); // Adjust within bounds
+    }
+    onResize(sidebarWidth); // Notify parent component
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [isOpen, sidebarWidth]);
 
   const handleMouseMove = (e: MouseEvent) => {
     if (isDragging.current) {
@@ -53,7 +71,7 @@ export default function Sidebar({
 
       {/* Sidebar Content */}
       <div className="h-[calc(100vh-50px)] overflow-auto"> {/* Adjust height to account for header */}
-        <Documents />
+        <Documents data={folder} />
       </div>
 
       {/* Resizing Handle */}

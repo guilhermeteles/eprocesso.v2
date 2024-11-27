@@ -45,9 +45,12 @@ export default function MainContentHeader({ onMenuToggle, colorMode }: MainConte
 
           <div className="flex gap-6 mr-4 flex-shrink-0">
             <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold />
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
               <HeaderTextCopy text="05136946504" icon={faUser} bold />
-              <HeaderTextCopy text="UOLIRHEZOWL UVORXRL WV XZIEZOSL" />
+              <HeaderTextCopy
+                className="truncate" // Ensure max-width for truncation
+                text="UOLIRHEZOWL UVORXRL WV XZIEZOSL"
+              />
             </div>
             <ProcessoSigiloso
               text="Processo Sigiloso"
