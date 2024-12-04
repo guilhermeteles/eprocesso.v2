@@ -57,6 +57,9 @@ module.exports = {
 		screens: {
 			'3xl': '1920px', // Define the minimum width for your 3xl breakpoint
 		},
+		spacing: {
+			'4': '16px',
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],
