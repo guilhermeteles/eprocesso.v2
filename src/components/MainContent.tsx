@@ -39,7 +39,7 @@ export default function MainContent({ onMenuToggle, sidebarWidth, colorMode }: P
   }, []);
 
   console.log('Header Height:', headerHeight); // Debug log
-
+  const numCols = window.innerWidth > 1024 ? 3 : 2;
   return (
     <div
       className="flex-1 flex flex-col bg-[#F7F9FA]"
@@ -54,7 +54,7 @@ export default function MainContent({ onMenuToggle, sidebarWidth, colorMode }: P
       </div>
 
       {/* Content */}
-      <Cards />
+      <Cards numCols={numCols} />
     </div>
   );
 }

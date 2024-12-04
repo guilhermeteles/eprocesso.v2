@@ -2,7 +2,7 @@ import { useColorContext } from '@/context/ColorContext';
 import HeaderTextCopy from '@/components/HeaderTextCopy';
 import { useState } from 'react';
 import Nav from './Nav';
-import { faBars, faFile, faFileLines, faFolder, faFolderOpen, faHamburger, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faFolder, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import FavProcesso from '@/components/FavProcesso';
 import Indicadores from './Indicadores';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
