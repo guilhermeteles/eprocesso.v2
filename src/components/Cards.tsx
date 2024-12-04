@@ -1,32 +1,27 @@
-import { useState, useEffect } from 'react';
-import CardNotas from './CardNotas';
-import CardPendencias from './CardPendencias';
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import CardCienciasPendentes from "./CardCienciasPendentes";
+import CardManifestacoesPendentes from "./CardManifestacoesPendentes";
+import CardNotas from "./CardNotas";
+import CardPendencias from "./CardPendencias";
 
-export default function Cards() {
-  const [numCols, setNumCols] = useState<number>(1);
-
-  useEffect(() => {
-    const calculateColumns = () => {
-      const containerWidth = document.querySelector('.grid')?.clientWidth || 0;
-      const columnWidth = 340; // Matches the `minmax(340px, 1fr)` in the grid definition
-      setNumCols(Math.max(1, Math.floor(containerWidth / columnWidth)));
-    };
-
-    // Initial calculation
-    calculateColumns();
-
-    // Recalculate on resize
-    window.addEventListener('resize', calculateColumns);
-    return () => {
-      window.removeEventListener('resize', calculateColumns);
-    };
-  }, []);
-
+export default function CardsComponent({ numCols }: { numCols: number }) {
   return (
-    <div className="grid w-full h-full ml-1 sm:p-8 gap-4 items-start overflow-y-auto sm:overflow-y-none container-fluid grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
-      <CardPendencias numCols={numCols} />
-      <CardNotas numCols={numCols} />
-      <div className={`h-fit ${numCols === 3 ? '' : 'hidden'}`}></div>
+    <div className="w-full h-full ml-1 sm:p-6 overflow-y-auto sm:overflow-y-none">
+      <ResponsiveMasonry
+        columnsCountBreakPoints={{
+          350: 1, // 1 column for small screens
+          750: 2, // 2 columns for medium screens
+          1024: 3, // 3 columns for larger screens
+          1440: 4, // 4 columns for extra-large screens
+        }}
+      >
+        <Masonry gutter="16px">
+          <CardPendencias numCols={numCols} />
+          <CardNotas numCols={numCols} />
+          <CardManifestacoesPendentes numCols={numCols} />
+          <CardCienciasPendentes numCols={numCols} />
+        </Masonry>
+      </ResponsiveMasonry>
     </div>
   );
 }

@@ -54,6 +54,9 @@ module.exports = {
 		fontFamily: {
 			sans: ['Rawline', 'sans-serif'], // Extend with fallback
 		},
+		screens: {
+			'3xl': '1920px', // Define the minimum width for your 3xl breakpoint
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],

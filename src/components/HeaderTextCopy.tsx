@@ -40,7 +40,7 @@ export default function HeaderTextCopy({
                 copied ? 'text-green-500' : 'text-white'
               }`}
             >
-              {icon && <FontAwesomeIcon icon={icon} className="mr-2" />} {/* Render icon if provided */}
+              {icon && <FontAwesomeIcon icon={icon} className="mr-1" />} {/* Render icon if provided */}
               <span
                 className={`truncate ${copied ? 'font-bold' : bold ? 'font-bold' : ''}`}
               >

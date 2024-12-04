@@ -2,7 +2,7 @@ import { useColorContext } from '@/context/ColorContext';
 import HeaderTextCopy from '@/components/HeaderTextCopy';
 import { useState } from 'react';
 import Nav from './Nav';
-import { faFile, faFolderOpen, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faFile, faFileLines, faFolder, faFolderOpen, faHamburger, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import FavProcesso from '@/components/FavProcesso';
 import Indicadores from './Indicadores';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,43 +28,40 @@ export default function MainContentHeader({ onMenuToggle, colorMode }: MainConte
 
   return (
     <div className="sm:ml-2 w-full">
-      <div className="w-full overflow-x-auto">
-        <header
-          className={`${defaultColor} px-4 gap-2 flex items-center h-[50px] w-max min-w-full`}
-        >
-          <Button
-            className={`${darker} sm:hidden rounded p-2 shrink-0`}
-            size="empty"
-            variant="ghost"
-            onClick={onMenuToggle}
-          >
-            <FontAwesomeIcon icon={faFolderOpen} className="pl-0.5" />
-          </Button>
+  <div className={`${defaultColor} overflow-x-auto`}>
+    <header
+      className={`${defaultColor} px-4 flex items-center h-[50px] gap-2 sm:gap-6 `}
+    >
+      <Button
+        className={`${darker} sm:hidden rounded p-2`}
+        size="empty"
+        variant="ghost"
+        onClick={onMenuToggle}
+      >
+        <FontAwesomeIcon icon={faFolder} className="pl-0.5" />
+      </Button>
+ 
+      <FavProcesso />
+      <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold className='truncate min-w-10'/>
+      <span className='flex gap-2 truncate min-w-30'>
+        <HeaderTextCopy text="05136946504" icon={faUser} bold className='truncate min-w-20'/>
+        <HeaderTextCopy text="UOLIRHEZOWL UVORXRL WV XZIEZOSL" className='truncate min-w-10'/>
+      </span>
+      
 
-          <FavProcesso />
+      <ProcessoSigiloso
+          text="Processo Sigiloso"
+          icon={faLock}
+          isDraggable={isDraggable}
+          onOpen={handleProcessoSigilosoClick}
+          onClose={closeProcessoSigiloso}
+        />
 
-          <div className="flex gap-6 mr-4 flex-shrink-0">
-            <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold />
-            <div className="flex gap-2 items-center">
-              <HeaderTextCopy text="05136946504" icon={faUser} bold />
-              <HeaderTextCopy
-                className="truncate" // Ensure max-width for truncation
-                text="UOLIRHEZOWL UVORXRL WV XZIEZOSL"
-              />
-            </div>
-            <ProcessoSigiloso
-              text="Processo Sigiloso"
-              icon={faLock}
-              isDraggable={isDraggable}
-              onOpen={handleProcessoSigilosoClick}
-              onClose={closeProcessoSigiloso}
-            />
-          </div>
+      <Indicadores />
+    </header>
+  </div>
+  <Nav colorMode={colorMode} />
+</div>
 
-          <Indicadores />
-        </header>
-      </div>
-      <Nav colorMode={colorMode} />
-    </div>
   );
 }

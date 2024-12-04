@@ -57,7 +57,7 @@ export default function CardPendencias({ numCols }: { numCols: number }) {
   const cardContent = pendencias.map((item, index) => (
     <div
       key={index}
-      className="text-gray-700 bg-red-100 px-3 py-2 rounded-md flex items-center gap-3"
+      className="text-gray-700 bg-[#FDE0DB] px-3 py-2 rounded-md flex items-center gap-3"
     >
       
       {item.customBadge ? (
