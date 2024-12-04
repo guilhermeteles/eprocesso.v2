@@ -37,7 +37,7 @@ export default function ProcessoSigiloso({
       {/* HoverCard trigger is always visible */}
       <HoverCard openDelay={100} closeDelay={200}>
         <HoverCardTrigger
-          className="flex items-center gap-2 cursor-pointer whitespace-nowrap truncate max-w-4"
+          className="flex items-center gap-2 cursor-pointer whitespace-nowrap"
           onClick={toggleDraggable} // Toggle draggable visibility
         >
           {icon && <FontAwesomeIcon icon={icon} className="mr-1"/>}

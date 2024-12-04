@@ -42,10 +42,10 @@ export default function MainContentHeader({ onMenuToggle, colorMode }: MainConte
       </Button>
  
       <FavProcesso />
-      <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold className='truncate min-w-10'/>
-      <span className='flex gap-2 truncate min-w-30'>
-        <HeaderTextCopy text="05136946504" icon={faUser} bold className='truncate min-w-20'/>
-        <HeaderTextCopy text="UOLIRHEZOWL UVORXRL WV XZIEZOSL" className='truncate min-w-10'/>
+      <HeaderTextCopy text="10090.000003/0419-05" icon={faFile} bold />
+      <span className='flex gap-2'>
+        <HeaderTextCopy text="05136946504" icon={faUser} bold />
+        <HeaderTextCopy text="UOLIRHEZOWL UVORXRL WV XZIEZOSL" />
       </span>
       
 
